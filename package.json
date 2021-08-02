@@ -7,7 +7,7 @@
     "url": "git+https://github.com/kmjc6611/youtube-clone.git"
   },
   "scripts": {
-    "win": "node index.js"
+    "dev": "nodemon --exec babel-node index.js"
   },
   "author": "MJ.dev",
   "license": "ISC",
@@ -16,5 +16,11 @@
   },
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/node": "^7.14.9",
+    "@babel/preset-env": "^7.14.9",
+    "nodemon": "^2.0.12"
   }
 }
