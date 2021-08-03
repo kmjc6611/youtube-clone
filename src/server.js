@@ -1,33 +1,17 @@
-import express from "express";
+import express from "express"; //express로부터 express를 불러옴
+import globalRouter from "./routers/globalRouter";
+import usersRouter from "./routers/userRouter";
+import videoRouter from "./routers/videoRouter";
 
-const app = express();
+const PORT = 4000;
 
-const middleWare = (req, res, next) => {
-    console.log("I'm the middleWare!")
-    next();
-}
+const app = express(); //express함수로 익스프레스 앱을 만듬
 
-const handleHome = (req, res) =>{
-    return res.send("답장 보낸다. ㅋ");
-};
+app.use("/", globalRouter);
+app.use("/users", usersRouter);
+app.use("/videos", videoRouter);
 
-const privateMiddleware = (req, res, next) => {
-    const url = req.url;
-    if (url === "/protected"){
-        return res.send("<h1>Not Allowed</h1>");
-    }
-    console.log("Allowed, you may continue.");
-    next();
-};
+const handleListening = () =>
+  console.log(`Server listening on port http://localhost:${PORT}`); //listen의 콜백함수 구현
 
-const handleProtected = (req,res) => {
-    return res.send("비밀 공간인데 어떻게 들어왔지?")
-}
-
-app.use(middleWare);
-app.use(privateMiddleware);
-app.get("/", handleHome);
-app.get("/protected", handleProtected);
-
-
-app.listen(4000, () => console.log("Server On 4000 Port"));
+app.listen(PORT, handleListening); // 서버는 사용자가 보내는 request를 항상 listen하고 있어야한다.(상호작용하기위해)
