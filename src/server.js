@@ -11,6 +11,7 @@ const app = express(); //express함수로 익스프레스 앱을 만듬
 const logger = morgan("dev");
 
 app.set("view engine","pug");
+app.set("views",process.cwd() + "/src/views");
 app.use(logger);
 app.use("/", globalRouter);
 app.use("/users", usersRouter);
