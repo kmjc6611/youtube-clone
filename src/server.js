@@ -1,12 +1,17 @@
 import express from "express"; //express로부터 express를 불러옴
+import morgan from "morgan"
 import globalRouter from "./routers/globalRouter";
 import usersRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 
+
 const PORT = 4000;
 
 const app = express(); //express함수로 익스프레스 앱을 만듬
+const logger = morgan("dev");
 
+app.set("view engine","pug");
+app.use(logger);
 app.use("/", globalRouter);
 app.use("/users", usersRouter);
 app.use("/videos", videoRouter);
